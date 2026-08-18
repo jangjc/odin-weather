@@ -1,6 +1,13 @@
 const searchBox = document.querySelector("#search-box");
 const searchBtn = document.querySelector("#search-btn");
 
+function processWeatherData(rawData) {
+    return {
+        address: rawData.address,
+        temparature: rawData.currentConditions?.temp,
+    }
+}
+
 async function getWeather() {
     // .trim() removes accidental leading/trailing spaces
     const searchTerm = searchBox.value.trim() || "london";
@@ -12,10 +19,12 @@ async function getWeather() {
             throw new Error(`Location not found (${response.status})`);
         }
 
-        const weatherData = await response.json();
-        console.log(weatherData);
-        console.log("Target Address", weatherData.address);
-        console.log("Current Temparature", weatherData.currentConditions.temp);
+        const rawData = await response.json();
+        const cleanData = processWeatherData(rawData);
+        console.log("After processing: ", cleanData);
+        // console.log("Target Address", weatherData.address);
+        // console.log("Current Temparature", weatherData.currentConditions?.temp);
+        return cleanData;
 
     } catch (err) {
         console.error("Error fetching weather:", err.message);
