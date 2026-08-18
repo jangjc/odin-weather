@@ -8,9 +8,17 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- add input and button for the city to search -->
-    <input type="text" id="search-box" placeholder="Enter a location to search...">
-    <button id="search-btn">Search</button>
+    <form id="search-form">
+        <!-- add input and button for the city to search -->
+        <input type="text" id="search-box" placeholder="Enter a location to search...">
+        <button type="submit" id="search-btn">Search</button>
+    </form>
+
+    <div id="weather-display">
+        <h2 id="location-display">Location will appear hear</h2>
+        <p id="temp-display">-- °C</p>
+        <button id="unit-toggle" type="button">Switch to °F</button>
+    </div>
     
 </body>
 </html>
