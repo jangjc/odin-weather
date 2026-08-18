@@ -6,7 +6,7 @@ async function getWeather() {
     const searchTerm = searchBox.value.trim() || "london";
 
     try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchTerm}?key=FUH9F7JAEJCJCMVVJZ7WBMN92`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchTerm}?key=FUH9F7JAEJCJCMVVJZ7WBMN92&unitGroup=metric`);
         
         if (!response.ok) {
             throw new Error(`Location not found (${response.status})`);
@@ -14,6 +14,8 @@ async function getWeather() {
 
         const weatherData = await response.json();
         console.log(weatherData);
+        console.log("Target Address", weatherData.address);
+        console.log("Current Temparature", weatherData.currentConditions.temp);
 
     } catch (err) {
         console.error("Error fetching weather:", err.message);
